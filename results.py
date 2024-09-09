@@ -23,19 +23,22 @@ def display_race_results():
               f'\n'
               f'Race Name: \t {race_info_dict['raceName']}\n'
               f'Circuit: \t {race_info_dict['Circuit']['circuitName']}\n'
-              f'City: \t {race_info_dict['Circuit']['Location']['locality']}\n'
-              f'\n')
+              f'City: \t\t {race_info_dict['Circuit']['Location']['locality']}\n')
+
         print('Results: \n'
               '\n'
-              'Position\t\t\t\tName\t\tConstructor\t\t\t\t\tInterval')
+              'Position\t\tName\t\t\tConstructor\t\t\t\t\tInterval')
+
         for driver in race_results_dict:
-            print(f'{driver['positionText']}\t\t\t\t{driver['Driver']['givenName']} {driver['Driver']['familyName']}\t\t{driver['Constructor']['name']}\t\t\t\t\t{driver['Time']['time']}\t')
+            position_text = driver['positionText']
+            driver_name = f"{driver['Driver']['givenName']} {driver['Driver']['familyName']}"
+            constructor_name = driver['Constructor']['name']
+            interval = driver.get('Time', {}).get('time', 'N/A')
+
+            print(f'{position_text}\t\t\t\t{driver_name}\t\t{constructor_name}\t\t\t\t{interval}\t')
 
     else:
         print('Invalid season or round!')
-
-    print(race_results['MRData']['RaceTable'])
-
 
 
 # Test functions
