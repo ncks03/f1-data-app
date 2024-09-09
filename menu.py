@@ -1,30 +1,67 @@
-def mainmenu():
-    while True:
-        print(
-            f'Welkom bij de f1 data app\n'
-            f'Je kan de volgende functionaliteiten kiezen:\n'
-            f'\t1. Resultaten van de laatste race\n'
-            f'\t2. Huidige standings coureurs\n'
-            f'\t3. Huidige standings teams\n'
-            f'\t4. Informatie over specifieke coureur\n'
-            f'\t5. Informatie over specifiek team\n'
-        )
-        choice = input('Vul het nummer van uw keuze in: \n')
+# Imports
+from results import get_results
 
+# Menu function
+def mainmenu():
+    # Infinite while loop for main menu
+    while True:
+        menu_stop = False
+
+        print(
+            f'Welcome to the f1 data app\n'
+            f'You can choose from the following functionalities:\n'
+            f'\t1. Results from last race\n'
+            f'\t2. Current driver standings\n'
+            f'\t3. Current team standings\n'
+            f'\t4. Information on specific driver\n'
+            f'\t5. Information on specific team\n'
+        )
+
+        # User chooses what they want to see
+        choice = input('Input you choice number: \n')
+
+        # If statement to call chosen function
         if choice == '1':
-            continue
+            get_results()
+
         elif choice == '2':
-            continue
+            break
+
         elif choice == '3':
-            continue
+            break
+
         elif choice == '4':
-            continue
+            break
+
         elif choice == '5':
-            continue
+            break
+
         else:
-            print(f'Keuze \'{choice}\' bestaat niet, vul een juiste keuze in')
-            choice = input('Vul het nummer van uw keuze in: \n')
+            print(f'Choice \'{choice}\' doesn\'t exist. Please try again.')
+            choice = input('Input your choice number: \n')
             continue
+
+        # While loop for choice to continue
+        while True:
+            doorgaan = input('Do you want to make another choice? (yes/no) ')
+
+            doorgaan = doorgaan.lower()
+
+            if doorgaan == 'yes':
+                menu_stop = False
+                break
+            elif doorgaan == 'no':
+                menu_stop = True
+                break
+            else:
+                print(f'\'{choice}\' isn\'t a valid choice. Please enter yes or no.')
+                doorgaan = input('Do you want to make another choice? (yes/no) ')
+                continue
+
+        if menu_stop == False:
+            continue
+        elif menu_stop == True:
+            break
 
 if __name__ == '__main__':
     mainmenu()
