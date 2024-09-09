@@ -22,7 +22,14 @@ def display_race_results():
         print(f'Now viewing results from {season} season, round {round}:\n'
               f'\n'
               f'Race Name: \t {race_info_dict['raceName']}\n'
-              f'Circuit: \t {race_info_dict['Circuit']['circuitName']}\n')
+              f'Circuit: \t {race_info_dict['Circuit']['circuitName']}\n'
+              f'City: \t {race_info_dict['Circuit']['Location']['locality']}\n'
+              f'\n')
+        print('Results: \n'
+              '\n'
+              'Position\t\t\t\tName\t\tConstructor\t\t\t\t\tInterval')
+        for driver in race_results_dict:
+            print(f'{driver['positionText']}\t\t\t\t{driver['Driver']['givenName']} {driver['Driver']['familyName']}\t\t{driver['Constructor']['name']}\t\t\t\t\t{driver['Time']['time']}\t')
 
     else:
         print('Invalid season or round!')

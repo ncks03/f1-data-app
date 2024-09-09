@@ -1,5 +1,5 @@
 # Imports
-from results import get_results
+from results import display_race_results
 
 # Menu function
 def main_menu():
@@ -24,7 +24,7 @@ def main_menu():
             break
 
         elif choice == '2':
-            get_results()
+            display_race_results()
 
         elif choice == '3':
             break
