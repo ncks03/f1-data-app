@@ -2,7 +2,7 @@
 from results import get_results
 
 # Menu function
-def mainmenu():
+def main_menu():
     # Infinite while loop for main menu
     while True:
         menu_stop = False
@@ -39,19 +39,19 @@ def mainmenu():
 
         # While loop for choice to continue
         while True:
-            doorgaan = input('Do you want to make another choice? (yes/no) ')
+            cont = input('Do you want to make another choice? (yes/no) ')
 
-            doorgaan = doorgaan.lower()
+            cont = cont.lower()
 
-            if doorgaan == 'yes':
+            if cont == 'yes':
                 menu_stop = False
                 break
-            elif doorgaan == 'no':
+            elif cont == 'no':
                 menu_stop = True
                 break
             else:
                 print(f'\'{choice}\' isn\'t a valid choice. Please enter yes or no.')
-                doorgaan = input('Do you want to make another choice? (yes/no) ')
+                cont = input('Do you want to make another choice? (yes/no) ')
                 continue
 
         if menu_stop == False:
@@ -60,4 +60,4 @@ def mainmenu():
             break
 
 if __name__ == '__main__':
-    mainmenu()
+    main_menu()

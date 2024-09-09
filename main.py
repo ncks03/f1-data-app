@@ -1,11 +1,10 @@
-# Applicatie voor het opvragen van data over het f1 2024 seizoen
 
 # Imports
-from menu import mainmenu
+from menu import main_menu
 
 # Main function
 def main():
-    mainmenu()
+    main_menu()
 
 if __name__ == '__main__':
     main()
