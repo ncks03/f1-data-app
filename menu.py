@@ -10,11 +10,10 @@ def mainmenu():
         print(
             f'Welcome to the f1 data app\n'
             f'You can choose from the following functionalities:\n'
-            f'\t1. Results from last race\n'
-            f'\t2. Current driver standings\n'
-            f'\t3. Current team standings\n'
-            f'\t4. Information on specific driver\n'
-            f'\t5. Information on specific team\n'
+            f'\t1. Race schedule\n'
+            f'\t2. Results from previous race\n'
+            f'\t3. Current driver standings\n'
+            f'\t4. Current team standings\n'
         )
 
         # User chooses what they want to see
@@ -22,18 +21,15 @@ def mainmenu():
 
         # If statement to call chosen function
         if choice == '1':
-            get_results()
+            break
 
         elif choice == '2':
-            break
+            get_results()
 
         elif choice == '3':
             break
 
         elif choice == '4':
-            break
-
-        elif choice == '5':
             break
 
         else:
