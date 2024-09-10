@@ -12,6 +12,12 @@ def display_race_results():
 
     # Which season does the user want results from
     season = int(input('Which season do you want race results from? '))
+
+    # Print number of rounds of season for ease of use
+    number_of_races = (requests.get(f'http://ergast.com/api/f1/{season}.json')['MRData']['RaceTable']['Races'])
+    print(f'The {season} season has {len(number_of_races)} rounds')
+
+    # Which round does the user want results from
     round = int(input('Which round do you want race results from? '))
 
     race_results = fetch_race_results(season, round).json()
