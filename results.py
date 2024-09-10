@@ -25,18 +25,19 @@ def display_race_results():
               f'Circuit: \t {race_info_dict['Circuit']['circuitName']}\n'
               f'City: \t\t {race_info_dict['Circuit']['Location']['locality']}\n')
 
-        print('Results: \n'
-              '\n'
-              'Position\t\tName\t\t\tConstructor\t\t\t\t\tInterval')
+        # Print header
+        header = '%-12s%-20s%-25s%-12s' % ('Position', 'Driver', 'Constructor', 'Interval')
+        print(header)
+        print('-' * len(header))
 
+        # Print results
         for driver in race_results_dict:
             position_text = driver['positionText']
             driver_name = f"{driver['Driver']['givenName']} {driver['Driver']['familyName']}"
             constructor_name = driver['Constructor']['name']
             interval = driver.get('Time', {}).get('time', 'N/A')
 
-            print(f'{position_text}\t\t\t\t{driver_name}\t\t{constructor_name}\t\t\t\t{interval}\t')
-
+            print('%-12s%-20s%-25s%-12s' % (position_text, driver_name, constructor_name, interval))
     else:
         print('Invalid season or round!')
 
