@@ -1,5 +1,6 @@
 # Imports
 from results import display_race_results
+from race_schedule import display_race_schedule
 
 # Menu function
 def main_menu():
@@ -21,7 +22,7 @@ def main_menu():
 
         # If statement to call chosen function
         if choice == '1':
-            break
+            display_race_schedule()
 
         elif choice == '2':
             display_race_results()
@@ -39,7 +40,7 @@ def main_menu():
 
         # While loop for choice to continue
         while True:
-            cont = input('Do you want to make another choice? (yes/no) ')
+            cont = input(f'\nDo you want to make another choice? (yes/no) ')
 
             cont = cont.lower()
 
