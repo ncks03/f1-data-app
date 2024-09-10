@@ -1,6 +1,7 @@
 # Imports
 from results import display_race_results
 from race_schedule import display_race_schedule
+from driver_standings import display_driver_standings
 
 # Menu function
 def main_menu():
@@ -28,7 +29,7 @@ def main_menu():
             display_race_results()
 
         elif choice == '3':
-            break
+            display_driver_standings()
 
         elif choice == '4':
             break
