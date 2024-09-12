@@ -14,15 +14,13 @@ def display_constructor_standings():
 
     # Define current standings
     constructor_leaderboard = fetch_constructor_standings()
-
-    print(constructor_leaderboard)
     constructor_leaderboard = constructor_leaderboard['MRData']['StandingsTable']['StandingsLists'][0]['ConstructorStandings']
 
     # Print season
-    print(f'Now viewing driver standings from 2024 season:\n')
+    print(f'Now viewing constructor standings from 2024 season:\n')
 
     # Print header
-    header = '%-10s%-25s%-20s%-12s' % ('Position', 'Driver', 'Constructor', 'Points')
+    header = '%-10s%-25s%-20s%-12s' % ('Position', 'Constructor', 'Nationality', 'Points')
     print(header)
     print('-' * len(header))
 
