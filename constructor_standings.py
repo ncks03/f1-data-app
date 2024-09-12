@@ -14,6 +14,8 @@ def display_constructor_standings():
 
     # Define current standings
     constructor_leaderboard = fetch_constructor_standings()
+
+    print(constructor_leaderboard)
     constructor_leaderboard = constructor_leaderboard['MRData']['StandingsTable']['StandingsLists'][0]['ConstructorStandings']
 
     # Print season
@@ -25,13 +27,13 @@ def display_constructor_standings():
     print('-' * len(header))
 
     # Print results
-    for driver in constructor_leaderboard:
-        position_text = driver['positionText']
-        driver_name = f"{driver['Driver']['givenName']} {driver['Driver']['familyName']}"
-        constructor_name = driver['Constructors'][0]['name']
-        points = driver['points']
+    for constructor in constructor_leaderboard:
+        position_text = constructor['positionText']
+        constructor_name = constructor['Constructor']['name']
+        nationality = constructor['Constructor']['nationality']
+        points = constructor['points']
 
-        print('%-10s%-25s%-20s%-12s' % (position_text, driver_name, constructor_name, points))
+        print('%-10s%-25s%-20s%-12s' % (position_text, constructor_name, nationality, points))
 
 if __name__ == '__main__':
     display_constructor_standings()
