@@ -3,11 +3,20 @@ from logging import raiseExceptions
 import requests
 
 def fetch_race_results(season, round):
+    try:
+        # Fetch results from ergast API
+        response = requests.get(f'http://ergast.com/api/f1/{season}/{round}/results.json')
 
-    # Fetch results from ergast API
-    race_results = requests.get(f'http://ergast.com/api/f1/{season}/{round}/results.json')
+        if response.status_code != 200:
+            print(f'An error occured: status code {response.status_code}')
+            return None
 
-    return race_results
+        else:
+            return response.json()
+
+    except requests.exceptions.RequestException as e:
+        print(f'An error occured: {e}')
+        return None
 
 def display_race_results():
 
@@ -15,20 +24,42 @@ def display_race_results():
     season = int(input('Which season do you want race results from? '))
 
     # Print number of rounds in season for ease of use
-    number_of_races = requests.get(f'http://ergast.com/api/f1/{season}.json')
-    print(f'The {season} season has {len(number_of_races.json()['MRData']['RaceTable']['Races'])} rounds')
+    try:
+        number_of_races = requests.get(f'http://ergast.com/api/f1/{season}.json')
 
-    # Which round does the user want results from
-    round = int(input('Which round do you want race results from? '))
+        if number_of_races.status_code != 200:
+            print(f'An error occured: status code {number_of_races.status_code}')
+            return None
 
-    # Raise error when user chooses round that doesn't exist in chosen season
-    if round > len(number_of_races.json()['MRData']['RaceTable']['Races']):
-        raise Exception(f'The {season} season does not have a round {round}')
+        else:
+            print(f'The {season} season has {len(number_of_races.json()['MRData']['RaceTable']['Races'])} rounds')
 
-    # Define results in dictionaries
-    race_results = fetch_race_results(season, round).json()
-    race_info_dict = race_results['MRData']['RaceTable']['Races'][0]
-    race_results_dict = race_results['MRData']['RaceTable']['Races'][0]['Results']
+    except requests.exceptions.RequestException as e:
+        print(f'An error occured: {e}')
+        return None
+
+    # Input loop
+    while True:
+        # Which round does the user want results from
+        round = int(input('Which round do you want race results from? '))
+
+        # Raise error when user chooses round that doesn't exist in chosen season
+        if round > len(number_of_races.json()['MRData']['RaceTable']['Races']):
+            print(f'The {season} season does not have a round {round}')
+            continue
+        else:
+            break
+
+    # Fix for when user inputs round that has not happened yet (2024 season)
+    try:
+        # Define results in dictionaries
+        race_results = fetch_race_results(season, round)
+        race_info_dict = race_results['MRData']['RaceTable']['Races'][0]
+        race_results_dict = race_results['MRData']['RaceTable']['Races'][0]['Results']
+
+    except IndexError:
+        print(f'This round has not happened yet or the data is incomplete')
+        return None
 
     # Check if results is a dictionary
     if type(race_results) == dict:
@@ -53,7 +84,7 @@ def display_race_results():
 
             print('%-10s%-25s%-20s%-12s' % (position_text, driver_name, constructor_name, interval))
     else:
-        print('Invalid season or round!')
+        print('Something went wrong!')
 
 # Test functions
 if __name__ == '__main__':
