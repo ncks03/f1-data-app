@@ -8,8 +8,10 @@ from constructor_standings import display_constructor_standings
 def main_menu():
     # Infinite while loop for main menu
     while True:
+        # define menu_stop variable so user can stop loop
         menu_stop = False
 
+        # Print options
         print(
             f'Welcome to the f1 data app\n'
             f'You can choose from the following functionalities:\n'
@@ -37,7 +39,6 @@ def main_menu():
 
         else:
             print(f'Choice \'{choice}\' doesn\'t exist. Please try again.')
-            choice = input('Input your choice number: \n')
             continue
 
         # While loop for choice to continue
@@ -46,20 +47,20 @@ def main_menu():
 
             cont = cont.lower()
 
-            if cont == 'yes':
+            if cont == 'yes' or cont == 'y':
                 menu_stop = False
                 break
-            elif cont == 'no':
+            elif cont == 'no' or cont == 'n':
                 menu_stop = True
                 break
             else:
                 print(f'\'{choice}\' isn\'t a valid choice. Please enter yes or no.')
-                cont = input('Do you want to make another choice? (yes/no) ')
                 continue
 
-        if menu_stop == False:
+        # Check if user wants to continue
+        if not menu_stop:
             continue
-        elif menu_stop == True:
+        elif menu_stop:
             break
 
 if __name__ == '__main__':
