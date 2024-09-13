@@ -1,16 +1,28 @@
 import requests
 
+API_URL = 'http://ergast.com/api/f1'
+
 def fetch_driver_standings():
 
-    driver_standings = requests.get(f'http://ergast.com/api/f1/current/driverStandings.json')
+    url = API_URL + '/current/driverStandings.json'
+    try:
+        response = requests.get(url)
+        
+        if response.status_code != 200:
+            print(f'Error fetching driver standings: status code {response.status_code}')
+            return None
+        else:
+            return response.json()
 
-    return driver_standings.json()
-
+    except requests.exceptions.RequestException as e:
+        print(f'Something went wrong: {e}')
+        return None
+    
 def display_driver_standings():
 
     # Define current standings
-    driver_leaderboard = fetch_driver_standings()
-    driver_leaderboard = driver_leaderboard['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings']
+    driver_standings = fetch_driver_standings()
+    driver_leaderboard = driver_standings['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings']
 
     # Print season
     print(f'Now viewing driver standings from 2024 season:\n')

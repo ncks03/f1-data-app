@@ -1,20 +1,28 @@
 import requests
 
-import driver_standings
-
+API_URL = 'http://ergast.com/api/f1'
 
 def fetch_constructor_standings():
 
-    url = f'http://ergast.com/api/f1/current/constructorStandings.json'
-    constructor_standings = requests.get(url)
+    url = API_URL + '/current/constructorStandings.json'
+    try:
+        response = requests.get(url)
 
-    return constructor_standings.json()
+        if response.status_code != 200:
+            print(f'An error occurred while fetching data: status code {response.status_code}')
+            return None
+        else:
+            return response.json()
+
+    except requests.exceptions.RequestException as e:
+        print(f'An error occurred while fetching data: {e}')
+        return None
 
 def display_constructor_standings():
 
     # Define current standings
-    constructor_leaderboard = fetch_constructor_standings()
-    constructor_leaderboard = constructor_leaderboard['MRData']['StandingsTable']['StandingsLists'][0]['ConstructorStandings']
+    constructor_standings = fetch_constructor_standings()
+    constructor_leaderboard = constructor_standings['MRData']['StandingsTable']['StandingsLists'][0]['ConstructorStandings']
 
     # Print season
     print(f'Now viewing constructor standings from 2024 season:\n')

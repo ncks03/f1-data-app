@@ -1,17 +1,46 @@
 import requests
 
+API_URL = 'http://ergast.com/api/f1'
+
 def fetch_race_schedule(season):
 
-    # Fetch schedule from ergast API
-    race_schedule = requests.get(f'http://ergast.com/api/f1/{season}.json')
+    url = f'{API_URL}/{season}.json'
+    try:
+        # Fetch schedule from ergast API
+        response = requests.get(f'{API_URL}/{season}.json')
+        
+        if response.status_code != 200:
+            print(f'Something went wrong while fetching data: status code {response.status_code}')
+            return None
+        else:
+            return response.json()
 
-    return race_schedule.json()
+    except requests.exceptions.RequestException as e:
+        print(f'Something went wrong while fetching data: {e}')
+        return None
 
 def display_race_schedule():
 
-    # Ask user which year's schedule they want to view
-    season = input('For which year would you like to see the race schedule?\n')
-    race_schedule_dict = fetch_race_schedule(season)
+    race_schedule_dict = {}
+    season = 0
+
+    # input loop for error handling
+    while True:
+        try:
+            # Ask user which year's schedule they want to view
+            season = int(input('For which year would you like to see the race schedule?\n'))
+        except ValueError:
+            print('Please enter a valid year.')
+            continue
+
+        # check if year does not exceed database limits
+        if season > 2024:
+            print('The database only goes op to 2024, sorry!')
+            continue
+
+        # Define race schedule
+        race_schedule_dict = fetch_race_schedule(season)
+        break
 
     # Convert race schedule to usable dictionaries
     race_schedule_dict = race_schedule_dict['MRData']['RaceTable']['Races']

@@ -2,20 +2,24 @@ from logging import raiseExceptions
 
 import requests
 
+API_URL = 'http://ergast.com/api/f1'
+
 def fetch_race_results(season, round):
+
+    url = f'{API_URL}/{season}/{round}/results.json'
     try:
         # Fetch results from ergast API
-        response = requests.get(f'http://ergast.com/api/f1/{season}/{round}/results.json')
+        response = requests.get(url)
 
         if response.status_code != 200:
-            print(f'An error occured: status code {response.status_code}')
+            print(f'An error occurred: status code {response.status_code}')
             return None
 
         else:
             return response.json()
 
     except requests.exceptions.RequestException as e:
-        print(f'An error occured: {e}')
+        print(f'An error occurred: {e}')
         return None
 
 def display_race_results():
@@ -23,19 +27,23 @@ def display_race_results():
     # Which season does the user want results from
     season = int(input('Which season do you want race results from? '))
 
+    if season > 2024:
+        print('The database only goes to season 2024, sorry!')
+        return None
+
     # Print number of rounds in season for ease of use
     try:
-        number_of_races = requests.get(f'http://ergast.com/api/f1/{season}.json')
+        number_of_races = requests.get(f'{API_URL}/{season}.json')
 
         if number_of_races.status_code != 200:
-            print(f'An error occured: status code {number_of_races.status_code}')
+            print(f'An error occurred: status code {number_of_races.status_code}')
             return None
 
         else:
             print(f'The {season} season has {len(number_of_races.json()['MRData']['RaceTable']['Races'])} rounds')
 
     except requests.exceptions.RequestException as e:
-        print(f'An error occured: {e}')
+        print(f'An error occurred: {e}')
         return None
 
     # Input loop
