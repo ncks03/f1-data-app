@@ -50,7 +50,7 @@ def main_menu():
             if continue_choice == 'yes' or continue_choice == 'y':
                 menu_stop = False
                 break
-            elif continue_choice == 'no' or continue_choice == 'n':
+            elif continue_choice == 'no' or continue_choice == 'n' or continue_choice == 'quit':
                 menu_stop = True
                 break
             else:
