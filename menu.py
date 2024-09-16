@@ -7,7 +7,7 @@ from constructor_standings import display_constructor_standings
 # Menu function
 def main_menu():
     """
-    This is the main menu of the application. This function requires input from the user and calls the right function.
+    This is the main menu of the application. This function uses input from the user to call the right functions.
     """
     # Infinite loop for main menu
     while True:
