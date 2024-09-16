@@ -1,32 +1,11 @@
-import requests
-
-API_URL = 'http://ergast.com/api/f1'
-
-def fetch_constructor_standings():
-    """
-    calls API to fetch constructor standings
-    :return response:
-    """
-    url = API_URL + '/current/constructorStandings.json'
-    try:
-        response = requests.get(url)
-
-        if response.status_code != 200:
-            print(f'An error occurred while fetching data: status code {response.status_code}')
-            return None
-        else:
-            return response.json()
-
-    except requests.exceptions.RequestException as e:
-        print(f'An error occurred while fetching data: {e}')
-        return None
+import api
 
 def display_constructor_standings():
     """
     Displays constructor standings
     """
     # Define current standings
-    constructor_standings = fetch_constructor_standings()
+    constructor_standings = api.fetch_constructor_standings()
     constructor_leaderboard = constructor_standings['MRData']['StandingsTable']['StandingsLists'][0]['ConstructorStandings']
 
     # Print season

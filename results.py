@@ -1,29 +1,4 @@
-import requests
-
-API_URL = 'http://ergast.com/api/f1'
-
-def fetch_race_results(season, round):
-    """
-    Fetches race results
-    :param season:
-    :param round:
-    :return response:
-    """
-    url = f'{API_URL}/{season}/{round}/results.json'
-    try:
-        # Fetch results from ergast API
-        response = requests.get(url)
-
-        if response.status_code != 200:
-            print(f'An error occurred: status code {response.status_code}')
-            return None
-
-        else:
-            return response.json()
-
-    except requests.exceptions.RequestException as e:
-        print(f'An error occurred: {e}')
-        return None
+import api
 
 def display_race_results():
     """
@@ -49,19 +24,13 @@ def display_race_results():
         return None
 
     # Print number of rounds in season for ease of use
-    try:
-        number_of_races = requests.get(f'{API_URL}/{season}.json')
-
-        if number_of_races.status_code != 200:
-            print(f'An error occurred: status code {number_of_races.status_code}')
-            return None
-
-        else:
-            print(f'The {season} season has {len(number_of_races.json()['MRData']['RaceTable']['Races'])} rounds\n')
-
-    except requests.exceptions.RequestException as e:
-        print(f'An error occurred: {e}')
+    season_info = api.fetch_season_info(season)
+    if not season_info:
+        print('Could not fetch season information.')
         return None
+
+    number_of_races = len(season_info['MRData']['RaceTable']['Races'])
+    print(f'The {season} season has {number_of_races} rounds\n')
 
     # Input loop
     while True:
@@ -69,7 +38,7 @@ def display_race_results():
         round = int(input('Which round do you want race results from?\n'))
 
         # Raise error when user chooses round that doesn't exist in chosen season
-        if round > len(number_of_races.json()['MRData']['RaceTable']['Races']):
+        if round > number_of_races:
             print(f'The {season} season does not have a round {round}')
             continue
         else:
@@ -78,7 +47,7 @@ def display_race_results():
     # Fix for when user inputs round that has not happened yet (2024 season)
     try:
         # Define results in dictionaries
-        race_results = fetch_race_results(season, round)
+        race_results = api.fetch_race_results(season, round)
         race_info_dict = race_results['MRData']['RaceTable']['Races'][0]
         race_results_dict = race_results['MRData']['RaceTable']['Races'][0]['Results']
 
@@ -96,7 +65,7 @@ def display_race_results():
               f'City: \t\t {race_info_dict['Circuit']['Location']['locality']}\n')
 
         # Print header
-        header = '%-10s%-25s%-20s%-12s' % ('Position', 'Driver', 'Constructor', 'Interval')
+        header = f'{"Position":<10}{"Driver":<25}{"Constructor":<20}{"Interval":<12}'
         print(header)
         print('-' * len(header))
 
@@ -107,7 +76,7 @@ def display_race_results():
             constructor_name = driver['Constructor']['name']
             interval = driver.get('Time', {}).get('time', 'N/A')
 
-            print('%-10s%-25s%-20s%-12s' % (position_text, driver_name, constructor_name, interval))
+            print(f'{position_text:<10}{driver_name:<25}{constructor_name:<20}{interval:<12}')
     else:
         print('Something went wrong!')
 

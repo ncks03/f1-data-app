@@ -1,25 +1,4 @@
-import requests
-
-API_URL = 'http://ergast.com/api/f1'
-
-def fetch_driver_standings():
-    """
-    Calls API to fetch driver standings
-    :return response:
-    """
-    url = API_URL + '/current/driverStandings.json'
-    try:
-        response = requests.get(url)
-        
-        if response.status_code != 200:
-            print(f'Error fetching driver standings: status code {response.status_code}')
-            return None
-        else:
-            return response.json()
-
-    except requests.exceptions.RequestException as e:
-        print(f'Something went wrong: {e}')
-        return None
+import api
     
 def display_driver_standings():
     """
@@ -27,7 +6,7 @@ def display_driver_standings():
     :return:
     """
     # Define current standings
-    driver_standings = fetch_driver_standings()
+    driver_standings = api.fetch_driver_standings()
     driver_leaderboard = driver_standings['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings']
 
     # Print season

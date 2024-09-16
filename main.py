@@ -1,5 +1,3 @@
-
-# Imports
 from menu import main_menu
 
 # Main function

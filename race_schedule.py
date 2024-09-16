@@ -1,27 +1,4 @@
-import requests
-
-API_URL = 'http://ergast.com/api/f1'
-
-def fetch_race_schedule(season):
-    """
-    Calls API to fetch race schedule for a given season
-    :param season:
-    :return response:
-    """
-    url = f'{API_URL}/{season}.json'
-    try:
-        # Fetch schedule from ergast API
-        response = requests.get(f'{API_URL}/{season}.json')
-        
-        if response.status_code != 200:
-            print(f'Something went wrong while fetching data: status code {response.status_code}')
-            return None
-        else:
-            return response.json()
-
-    except requests.exceptions.RequestException as e:
-        print(f'Something went wrong while fetching data: {e}')
-        return None
+import api
 
 def display_race_schedule():
     """
@@ -45,7 +22,7 @@ def display_race_schedule():
             continue
 
         # Define race schedule
-        race_schedule_dict = fetch_race_schedule(season)
+        race_schedule_dict = api.fetch_season_info(season)
         break
 
     # Convert race schedule to usable dictionaries
