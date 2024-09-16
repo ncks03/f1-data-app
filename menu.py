@@ -6,7 +6,7 @@ from constructor_standings import display_constructor_standings
 
 # Menu function
 def main_menu():
-    # Infinite while loop for main menu
+    # Infinite loop for main menu
     while True:
         # define menu_stop variable so user can stop loop
         menu_stop = False
@@ -22,39 +22,39 @@ def main_menu():
         )
 
         # User chooses what they want to see
-        choice = input('Input you choice number: \n')
+        user_choice = input('Input you choice number: \n')
 
         # If statement to call chosen function
-        if choice == '1':
+        if user_choice == '1':
             display_race_schedule()
 
-        elif choice == '2':
+        elif user_choice == '2':
             display_race_results()
 
-        elif choice == '3':
+        elif user_choice == '3':
             display_driver_standings()
 
-        elif choice == '4':
+        elif user_choice == '4':
             display_constructor_standings()
 
         else:
-            print(f'Choice \'{choice}\' doesn\'t exist. Please try again.')
+            print(f'Choice \'{user_choice}\' doesn\'t exist. Please try again.')
             continue
 
         # While loop for choice to continue
         while True:
-            cont = input(f'\nDo you want to make another choice? (yes/no) ')
+            continue_choice = input(f'\nDo you want to make another choice? (yes/no) ')
 
-            cont = cont.lower()
+            continue_choice = continue_choice.lower()
 
-            if cont == 'yes' or cont == 'y':
+            if continue_choice == 'yes' or continue_choice == 'y':
                 menu_stop = False
                 break
-            elif cont == 'no' or cont == 'n':
+            elif continue_choice == 'no' or continue_choice == 'n':
                 menu_stop = True
                 break
             else:
-                print(f'\'{choice}\' isn\'t a valid choice. Please enter yes or no.')
+                print(f'\'{user_choice}\' isn\'t a valid choice. Please enter yes or no.')
                 continue
 
         # Check if user wants to continue

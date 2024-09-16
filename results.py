@@ -1,5 +1,3 @@
-from logging import raiseExceptions
-
 import requests
 
 API_URL = 'http://ergast.com/api/f1'
