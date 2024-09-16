@@ -3,7 +3,11 @@ import requests
 API_URL = 'http://ergast.com/api/f1'
 
 def fetch_race_schedule(season):
-
+    """
+    Calls API to fetch race schedule for a given season
+    :param season:
+    :return response:
+    """
     url = f'{API_URL}/{season}.json'
     try:
         # Fetch schedule from ergast API
@@ -20,7 +24,9 @@ def fetch_race_schedule(season):
         return None
 
 def display_race_schedule():
-
+    """
+    Takes user input to display the chosen season schedule
+    """
     race_schedule_dict = {}
     season = 0
 

@@ -3,7 +3,10 @@ import requests
 API_URL = 'http://ergast.com/api/f1'
 
 def fetch_constructor_standings():
-
+    """
+    calls API to fetch constructor standings
+    :return response:
+    """
     url = API_URL + '/current/constructorStandings.json'
     try:
         response = requests.get(url)
@@ -19,7 +22,9 @@ def fetch_constructor_standings():
         return None
 
 def display_constructor_standings():
-
+    """
+    Displays constructor standings
+    """
     # Define current standings
     constructor_standings = fetch_constructor_standings()
     constructor_leaderboard = constructor_standings['MRData']['StandingsTable']['StandingsLists'][0]['ConstructorStandings']

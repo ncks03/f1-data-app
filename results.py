@@ -3,7 +3,12 @@ import requests
 API_URL = 'http://ergast.com/api/f1'
 
 def fetch_race_results(season, round):
-
+    """
+    Fetches race results
+    :param season:
+    :param round:
+    :return response:
+    """
     url = f'{API_URL}/{season}/{round}/results.json'
     try:
         # Fetch results from ergast API
@@ -21,9 +26,23 @@ def fetch_race_results(season, round):
         return None
 
 def display_race_results():
+    """
+    Takes input for season and round and displays the results of that race
+    """
+    # Set season to 2024 by default
+    season = 2024
 
     # Which season does the user want results from
-    season = int(input('Which season do you want race results from?\n'))
+    while True:
+        # User enters year
+        try:
+            season = int(input('Which year do you want race results from?\n'))
+            break
+
+        # User can try again if they did not enter a valid year
+        except ValueError:
+            print('Please enter a valid year!')
+            continue
 
     if season > 2024:
         print('The database only goes to season 2024, sorry!')

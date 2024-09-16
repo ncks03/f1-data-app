@@ -3,7 +3,10 @@ import requests
 API_URL = 'http://ergast.com/api/f1'
 
 def fetch_driver_standings():
-
+    """
+    Calls API to fetch driver standings
+    :return response:
+    """
     url = API_URL + '/current/driverStandings.json'
     try:
         response = requests.get(url)
@@ -19,7 +22,10 @@ def fetch_driver_standings():
         return None
     
 def display_driver_standings():
-
+    """
+    Displays the current driver standings
+    :return:
+    """
     # Define current standings
     driver_standings = fetch_driver_standings()
     driver_leaderboard = driver_standings['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings']
