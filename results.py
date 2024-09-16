@@ -23,7 +23,7 @@ def fetch_race_results(season, round):
 def display_race_results():
 
     # Which season does the user want results from
-    season = int(input('Which season do you want race results from? '))
+    season = int(input('Which season do you want race results from?\n'))
 
     if season > 2024:
         print('The database only goes to season 2024, sorry!')
@@ -38,7 +38,7 @@ def display_race_results():
             return None
 
         else:
-            print(f'The {season} season has {len(number_of_races.json()['MRData']['RaceTable']['Races'])} rounds')
+            print(f'The {season} season has {len(number_of_races.json()['MRData']['RaceTable']['Races'])} rounds\n')
 
     except requests.exceptions.RequestException as e:
         print(f'An error occurred: {e}')
@@ -47,7 +47,7 @@ def display_race_results():
     # Input loop
     while True:
         # Which round does the user want results from
-        round = int(input('Which round do you want race results from? '))
+        round = int(input('Which round do you want race results from?\n'))
 
         # Raise error when user chooses round that doesn't exist in chosen season
         if round > len(number_of_races.json()['MRData']['RaceTable']['Races']):
@@ -70,7 +70,7 @@ def display_race_results():
     # Check if results is a dictionary
     if type(race_results) == dict:
         # Print info about results
-        print(f'Now viewing results from {season} season, round {round}:\n'
+        print(f'\nNow viewing results from {season} season, round {round}:\n'
               f'\n'
               f'Race Name: \t {race_info_dict['raceName']}\n'
               f'Circuit: \t {race_info_dict['Circuit']['circuitName']}\n'

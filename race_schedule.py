@@ -46,7 +46,7 @@ def display_race_schedule():
     race_schedule_dict = race_schedule_dict['MRData']['RaceTable']['Races']
 
     # Print races in season
-    print(f'This is the race schedule for the year {season}:\n')
+    print(f'\nThis is the race schedule for the year {season}:\n')
 
     # Print table header
     header = '%-10s%-30s%-40s%-25s%-12s' % ('Round', 'Race', 'Circuit', 'Location', 'Date')

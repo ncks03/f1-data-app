@@ -13,7 +13,7 @@ def main_menu():
 
         # Print options
         print(
-            f'Welcome to the f1 data app\n'
+            f'\nWelcome to the f1 data app\n'
             f'You can choose from the following functionalities:\n'
             f'\t1. Race schedule\n'
             f'\t2. Results from previous race\n'
