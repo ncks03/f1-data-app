@@ -4,6 +4,7 @@ def display_race_schedule():
     """
     Takes user input to display the chosen season schedule
     """
+    # Set default values
     race_schedule_dict = {}
     season = 0
 
@@ -36,6 +37,7 @@ def display_race_schedule():
     print(header)
     print('-' * len(header))
 
+    # Print every entry in schedule
     for race in race_schedule_dict:
         round = race['round']
         race_name = race['raceName']

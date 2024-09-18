@@ -23,11 +23,12 @@ def display_race_results():
         print('The database only goes to season 2024, sorry!')
         return None
 
+    if season < 1950:
+        print('The database only goes from season 1950, sorry!')
+        return None
+
     # Print number of rounds in season for ease of use
     season_info = api.fetch_season_info(season)
-    if not season_info:
-        print('Could not fetch season information.')
-        return None
 
     number_of_races = len(season_info['MRData']['RaceTable']['Races'])
     print(f'The {season} season has {number_of_races} rounds\n')
@@ -55,30 +56,26 @@ def display_race_results():
         print(f'This round has not happened yet or the data is incomplete')
         return None
 
-    # Check if results is a dictionary
-    if type(race_results) == dict:
-        # Print info about results
-        print(f'\nNow viewing results from {season} season, round {round}:\n'
-              f'\n'
-              f'Race Name: \t {race_info_dict['raceName']}\n'
-              f'Circuit: \t {race_info_dict['Circuit']['circuitName']}\n'
-              f'City: \t\t {race_info_dict['Circuit']['Location']['locality']}\n')
+    # Print info about results
+    print(f'\nNow viewing results from {season} season, round {round}:\n'
+          f'\n'
+          f'Race Name: \t {race_info_dict['raceName']}\n'
+          f'Circuit: \t {race_info_dict['Circuit']['circuitName']}\n'
+          f'City: \t\t {race_info_dict['Circuit']['Location']['locality']}\n')
 
-        # Print header
-        header = f'{"Position":<10}{"Driver":<25}{"Constructor":<20}{"Interval":<12}'
-        print(header)
-        print('-' * len(header))
+    # Print header
+    header = f'{"Position":<10}{"Driver":<25}{"Constructor":<20}{"Interval":<12}'
+    print(header)
+    print('-' * len(header))
 
-        # Print results
-        for driver in race_results_dict:
-            position_text = driver['positionText']
-            driver_name = f"{driver['Driver']['givenName']} {driver['Driver']['familyName']}"
-            constructor_name = driver['Constructor']['name']
-            interval = driver.get('Time', {}).get('time', 'N/A')
+    # Print results
+    for driver in race_results_dict:
+        position_text = driver['positionText']
+        driver_name = f"{driver['Driver']['givenName']} {driver['Driver']['familyName']}"
+        constructor_name = driver['Constructor']['name']
+        interval = driver.get('Time', {}).get('time', 'N/A')
 
-            print(f'{position_text:<10}{driver_name:<25}{constructor_name:<20}{interval:<12}')
-    else:
-        print('Something went wrong!')
+        print(f'{position_text:<10}{driver_name:<25}{constructor_name:<20}{interval:<12}')
 
 # Test functions
 if __name__ == '__main__':
