@@ -9,10 +9,11 @@ def main_menu():
     """
     This is the main menu of the application. This function uses input from the user to call the right functions.
     """
-    # Infinite loop for main menu
-    while True:
-        # define menu_stop variable so user can stop loop
-        menu_stop = False
+    # define menu_stop variable so user can stop loop
+    menu_stop = False
+
+    # loop for main menu
+    while not menu_stop:
 
         # Print options
         print(
@@ -25,7 +26,7 @@ def main_menu():
         )
 
         # User chooses what they want to see
-        user_choice = input('Input you choice number: \n')
+        user_choice = input('Input your choice number: \n')
 
         # If statement to call chosen function
         if user_choice == '1':
@@ -59,12 +60,6 @@ def main_menu():
             else:
                 print(f'\'{user_choice}\' isn\'t a valid choice. Please enter yes or no.')
                 continue
-
-        # Check if user wants to continue
-        if not menu_stop:
-            continue
-        elif menu_stop:
-            break
 
 if __name__ == '__main__':
     main_menu()

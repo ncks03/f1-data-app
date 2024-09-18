@@ -12,7 +12,7 @@ def display_constructor_standings():
     print(f'Now viewing constructor standings from 2024 season:\n')
 
     # Print header
-    header = '%-10s%-25s%-20s%-12s' % ('Position', 'Constructor', 'Nationality', 'Points')
+    header = f'{'Position':<10}{'Constructor':<25}{'Nationality':<20}{'Points':<12}'
     print(header)
     print('-' * len(header))
 
@@ -23,7 +23,7 @@ def display_constructor_standings():
         nationality = constructor['Constructor']['nationality']
         points = constructor['points']
 
-        print('%-10s%-25s%-20s%-12s' % (position_text, constructor_name, nationality, points))
+        print(f'{position_text:<10}{constructor_name:<25}{nationality:<20}{points:<12}')
 
 if __name__ == '__main__':
     display_constructor_standings()

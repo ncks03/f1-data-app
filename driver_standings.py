@@ -13,7 +13,7 @@ def display_driver_standings():
     print(f'Now viewing driver standings from 2024 season:\n')
 
     # Print header
-    header = '%-10s%-25s%-20s%-12s' % ('Position', 'Driver', 'Constructor', 'Points')
+    header = f'{'Position':<10}{'Driver':<25}{'Constructor':<20}{'Points':<12}'
     print(header)
     print('-' * len(header))
 
@@ -24,7 +24,7 @@ def display_driver_standings():
         constructor_name = driver['Constructors'][0]['name']
         points = driver['points']
 
-        print('%-10s%-25s%-20s%-12s' % (position_text, driver_name, constructor_name, points))
+        print(f'{position_text:<10}{driver_name:<25}{constructor_name:<20}{points:<12}')
 
 if __name__ == '__main__':
     display_driver_standings()

@@ -32,7 +32,7 @@ def display_race_schedule():
     print(f'\nThis is the race schedule for the year {season}:\n')
 
     # Print table header
-    header = '%-10s%-30s%-40s%-25s%-12s' % ('Round', 'Race', 'Circuit', 'Location', 'Date')
+    header = f'{'Round':<10}{'Race':<30}{'Circuit':<40}{'Location':<25}{'Date':<12}'
     print(header)
     print('-' * len(header))
 
@@ -43,7 +43,7 @@ def display_race_schedule():
         place = f'{race['Circuit']['Location']['locality']}, {race['Circuit']['Location']['country']}'
         date = race['date']
 
-        print('%-10s%-30s%-40s%-25s%-12s' % (round, race_name, circuit, place, date))
+        print(f'{round:<10}{race_name:<30}{circuit:<40}{place:<25}{date:<12}')
 
 if __name__ == '__main__':
     display_race_schedule()
