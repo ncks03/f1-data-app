@@ -1,11 +1,10 @@
-# Imports
 from results import display_race_results
 from race_schedule import display_race_schedule
 from driver_standings import display_driver_standings
 from constructor_standings import display_constructor_standings
 
 # Menu function
-def main_menu():
+def display_menu():
     """
     This is the main menu of the application. This function uses input from the user to call the right functions.
     """
@@ -14,52 +13,64 @@ def main_menu():
 
     # loop for main menu
     while not menu_stop:
-
-        # Print options
-        print(
-            f'\nWelcome to the f1 data app\n'
-            f'You can choose from the following functionalities:\n'
-            f'\t1. Race schedule\n'
-            f'\t2. Results from previous race\n'
-            f'\t3. Current driver standings\n'
-            f'\t4. Current team standings\n'
+        # Define menu options in tuple
+        menu_options = (
+            ('Race Schedule', display_race_schedule),
+            ('Race Results', display_race_results),
+            ('Driver Standings', display_driver_standings),
+            ('Constructor Standings', display_constructor_standings),
+            ('Exit', None)
         )
 
-        # User chooses what they want to see
-        user_choice = input('Input your choice number: \n')
+        # Print options
+        print('\nWelcome to the F1 Data App. You can choose from the following functionalities:\n')
+        for index, option in enumerate(menu_options, start=1):
+            print(f'{index}: {option[0]}')
 
-        # If statement to call chosen function
-        if user_choice == '1':
-            display_race_schedule()
+        # Let user choose from options
+        try:
+            # User chooses what they want to see
+            user_choice = int(input('\nInput your choice number: \n')) - 1
 
-        elif user_choice == '2':
-            display_race_results()
+            choice, action = menu_options[user_choice]
 
-        elif user_choice == '3':
-            display_driver_standings()
-
-        elif user_choice == '4':
-            display_constructor_standings()
-
-        else:
-            print(f'Choice \'{user_choice}\' doesn\'t exist. Please try again.')
-            continue
-
-        # While loop for choice to continue
-        while True:
-            continue_choice = input(f'\nDo you want to make another choice? (yes/no) ')
-
-            continue_choice = continue_choice.lower()
-
-            if continue_choice == 'yes' or continue_choice == 'y':
-                menu_stop = False
-                break
-            elif continue_choice == 'no' or continue_choice == 'n' or continue_choice == 'quit':
+            # Checks if action is empty, then stops program
+            if not action:
                 menu_stop = True
                 break
+            # If action is defined, call action as function
             else:
-                print(f'\'{user_choice}\' isn\'t a valid choice. Please enter yes or no.')
-                continue
+                action()
+
+        except IndexError:
+            print(f'Choice {user_choice + 1} does not exist! Please enter a valid choice number')
+            continue
+
+        except ValueError:
+            print(f'That is not a valid input! Please enter a valid choice number')
+            continue
+
+        # Check if user wants to continue
+        if not continue_prompt():
+            menu_stop = True
+
+def continue_prompt():
+    """
+    Lets the user choose to continue or to stop
+    :return True if user chooses to continue, else False:
+    """
+    valid_input = {'yes', 'y', 'no', 'n', 'quit', 'exit'}
+    while True:
+        continue_choice = input(f'\nDo you want to make another choice? (yes/no) ')
+
+        continue_choice = continue_choice.lower()
+
+        # Check if continue_choice is a valid input
+        if continue_choice in valid_input:
+            # return True if input is yes or y
+            return continue_choice in {'yes', 'y'}
+        else:
+            print(f'Choice \'{continue_choice}\' isn\'t a valid choice. Please enter yes or no.')
 
 if __name__ == '__main__':
-    main_menu()
+    display_menu()
