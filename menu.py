@@ -11,16 +11,17 @@ def display_menu():
     # define menu_stop variable so user can stop loop
     menu_stop = False
 
+    # Define menu options in tuple
+    menu_options = (
+        ('Race Schedule', display_race_schedule),
+        ('Race Results', display_race_results),
+        ('Driver Standings', display_driver_standings),
+        ('Constructor Standings', display_constructor_standings),
+        ('Exit', None)
+    )
+
     # loop for main menu
     while not menu_stop:
-        # Define menu options in tuple
-        menu_options = (
-            ('Race Schedule', display_race_schedule),
-            ('Race Results', display_race_results),
-            ('Driver Standings', display_driver_standings),
-            ('Constructor Standings', display_constructor_standings),
-            ('Exit', None)
-        )
 
         # Print options
         print('\nWelcome to the F1 Data App. You can choose from the following functionalities:\n')
