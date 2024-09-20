@@ -12,20 +12,22 @@ def display_race_results():
         # User enters year
         try:
             season = int(input('Which year do you want race results from?\n'))
-            break
+
+            if season > 2024:
+                print('The database only goes to season 2024, sorry!')
+                continue
+
+            elif season < 1950:
+                print('The database only goes from season 1950, sorry!')
+                continue
+
+            else:
+                break
 
         # User can try again if they did not enter a valid year
         except ValueError:
             print('Please enter a valid year!')
             continue
-
-    if season > 2024:
-        print('The database only goes to season 2024, sorry!')
-        return None
-
-    if season < 1950:
-        print('The database only goes from season 1950, sorry!')
-        return None
 
     # Print number of rounds in season for ease of use
     season_info = api.fetch_season_info(season)

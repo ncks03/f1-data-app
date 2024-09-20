@@ -22,6 +22,10 @@ def display_race_schedule():
             print('The database only goes op to 2024, sorry!')
             continue
 
+        if season < 1950:
+            print('The database only goes from season 1950, sorry!')
+            continue
+
         # Define race schedule
         race_schedule_dict = api.fetch_season_info(season)
         break

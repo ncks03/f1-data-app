@@ -1,5 +1,5 @@
 import api
-    
+
 def display_driver_standings():
     """
     Displays the current driver standings
