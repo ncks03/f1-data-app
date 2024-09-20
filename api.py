@@ -26,17 +26,33 @@ def fetch_data(endpoint):
 
 # Functions for getting data from given endpoints
 def fetch_race_results(season, round):
+    """
+    Fetches race results for the given season and round.
+    :return data as json:
+    """
     endpoint = f'{season}/{round}/results.json'
     return fetch_data(endpoint)
 
 def fetch_season_info(season):
+    """
+    Fetches information about the given season.
+    :return data as json:
+    """
     endpoint = f'{season}.json'
     return fetch_data(endpoint)
 
 def fetch_constructor_standings():
+    """
+    Fetches constructor standings.
+    :return data as json:
+    """
     endpoint = 'current/constructorStandings.json'
     return fetch_data(endpoint)
 
 def fetch_driver_standings():
+    """
+    Fetches driver standings.
+    :return data as json:
+    """
     endpoint = 'current/driverStandings.json'
     return fetch_data(endpoint)
