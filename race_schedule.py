@@ -6,7 +6,7 @@ def display_race_schedule():
     """
     # Set default values
     race_schedule_dict = {}
-    season = 0
+    season = 2024
 
     # input loop for error handling
     while True:
