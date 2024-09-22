@@ -37,15 +37,21 @@ def display_race_results():
 
     # Input loop
     while True:
-        # Which round does the user want results from
-        round = int(input('Which round do you want race results from?\n'))
+        try:
+            # Which round does the user want results from
+            round = int(input('Which round do you want race results from?\n'))
 
-        # Raise error when user chooses round that doesn't exist in chosen season
-        if round > number_of_races:
-            print(f'The {season} season does not have a round {round}')
+            # Raise error when user chooses round that doesn't exist in chosen season
+            if round > number_of_races:
+                print(f'The {season} season does not have a round {round}')
+                continue
+            else:
+                break
+
+        # User can try again if they did not enter a valid round
+        except ValueError:
+            print('Please enter a valid round number!')
             continue
-        else:
-            break
 
     # Fix for when user inputs round that has not happened yet (2024 season)
     try:
