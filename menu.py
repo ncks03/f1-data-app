@@ -20,6 +20,7 @@ def display_menu():
         ('Exit', None)
     )
 
+    # Print finish flag ascii art
     print('⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣔⠒⠀⠉⠉⠢⡀⠀⠀⠀⠀⠀⠀⠀'
         '\n⠀⠀⠀⠀⠀⠀⣀⣀⠠⠄⠒⠘⢿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠱⡀⠀⠀⠀⠀⠀⠀'
         '\n⢺⣦⢻⣿⣿⣿⣿⣄⠀⠀⠀⠀⠈⢿⡿⠿⠛⠛⠐⣶⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀'
@@ -59,10 +60,12 @@ def display_menu():
             if not action:
                 menu_stop = True
                 break
+
             # If action is defined, call action as function
             else:
                 action()
 
+        # Handle index and value errors
         except IndexError:
             print(f'Choice {user_choice + 1} does not exist! Please enter a valid choice number')
             continue
@@ -80,8 +83,10 @@ def continue_prompt():
     Lets the user choose to continue or to stop
     :return True if user chooses to continue, else False:
     """
+    # Define valid inputs
     valid_input = {'yes', 'y', 'no', 'n', 'quit', 'exit'}
     while True:
+        # Ask user to continue
         continue_choice = input(f'\nDo you want to make another choice? (yes/no) ')
 
         continue_choice = continue_choice.lower()
@@ -90,6 +95,7 @@ def continue_prompt():
         if continue_choice in valid_input:
             # return True if input is yes or y
             return continue_choice in {'yes', 'y'}
+        # Print error for invalid input
         else:
             print(f'Choice \'{continue_choice}\' isn\'t a valid choice. Please enter yes or no.')
 
